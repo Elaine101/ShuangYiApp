@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="20dp"-->
+    <!--android:background="@drawable/dialog_bg">-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_title"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_margin="20dp"-->
+        <!--android:textSize="18sp"-->
+        <!--android:textColor="@color/primary_dark_material_dark"-->
+        <!--android:text="我只是一个标题"/>-->
+
+    <!---->
+
+    <!--&lt;!&ndash;<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:gravity="right">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/bt_cancel"-->
+            <!--android:layout_width="45dp"-->
+            <!--android:layout_height="32dp"-->
+            <!--android:text="取消"-->
+            <!--android:textColor="@color/accent_material_dark"-->
+            <!--android:background="@drawable/bg_click"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/bt_sure"-->
+            <!--android:layout_width="45dp"-->
+            <!--android:layout_height="32dp"-->
+            <!--android:text="确定"-->
+            <!--android:textColor="@color/accent_material_light"-->
+            <!--android:background="@drawable/bg_click"/>-->
+    <!--</LinearLayout>&ndash;&gt;-->
+
+<!--</LinearLayout>-->
+<android.support.v7.widget.AppCompatEditText xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/et_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:textColor="@color/primary_dark_material_light"
+    android:textSize="16sp"
+    app:backgroundTint="@color/colorPrimary"
+    android:textColorHint="@color/colorAccent" />
