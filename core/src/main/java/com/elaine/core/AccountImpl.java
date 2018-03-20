@@ -1,6 +1,7 @@
 package com.elaine.core;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.elaine.core.api.Urls;
 import com.elaine.core.model.LocalBean;
@@ -14,6 +15,10 @@ import java.security.MessageDigest;
 
 public class AccountImpl implements  AccountAction{
     private Context mContext;
+    //2表示来源为android
+    private static final  String SOURCE = "2";
+    //密钥
+    private static final String SECERT = "shuangyi_android";
 
     public AccountImpl(Context context){
         this.mContext = context;
@@ -21,15 +26,16 @@ public class AccountImpl implements  AccountAction{
 
     @Override
     public void login(String moblie, String passwd, ActionCallback<LocalBean> listener) {
+        String method = "login";
         String timestamp = getTime();
         new OkHttpRequest.Builder()
-                .url(Urls.LOGIN_URL)
-                .addParams("method","login")
+                .url(Urls.BASE_URL)
+                .addParams("method",method)
                 .addParams("mobile",moblie)
-                .addParams("password",passwd)
+                .addParams("password",MD5(passwd))
                 .addParams("timestamp",timestamp)
-                .addParams("source","android")
-                .addParams("sign",MD5("login"+timestamp+"android"+ "shuangyi_android"))
+                .addParams("source",SOURCE)
+                .addParams("sign",MD5(method+timestamp+SOURCE+SECERT))
                 .post(new ResponseCallback<LocalBean>(listener));
 
     }
@@ -37,7 +43,7 @@ public class AccountImpl implements  AccountAction{
     @Override
     public void register(String mobile, String code, String invite_code, String password_one, String password_confirm,String timestamp,ActionCallback<Void> callback) {
         new OkHttpRequest.Builder()
-                .url(Urls.REGISTER_URL)
+                .url(Urls.BASE_URL)
                 .addParams("mobile",mobile)
                 .addParams("code",code)
                 .addParams("invite_code",invite_code)
@@ -48,13 +54,16 @@ public class AccountImpl implements  AccountAction{
 
     }
 
+    @Override
+    public void fogetPassword(String mobile, String pwd_one, String pwd_two, String code, String idNumLastSix, String timestamp, ActionCallback<Void> callback) {
+
+    }
+
     public String getTime(){
 
         long time=System.currentTimeMillis();//获取系统时间的10位的时间戳
 
-        String  str=String.valueOf(time).substring(0,8);
-
-        return str;
+        return String.valueOf(time).substring(0,8);
 
     }
 
@@ -91,6 +100,10 @@ public class AccountImpl implements  AccountAction{
             hexValue.append(Integer.toHexString(val));
         }
         return hexValue.toString();
+    }
+
+    public static String generateSign(String method,String timestamp){
+        return MD5(method+timestamp+SOURCE+SECERT);
     }
 
 
