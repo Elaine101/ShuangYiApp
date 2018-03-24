@@ -6,13 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.Toolbar;
-
 import com.elaine.shuangyiapp.R;
 import com.elaine.shuangyiapp.classify.ClassifyPageFragment;
 import com.elaine.shuangyiapp.shop.AlternativePageFragment;
