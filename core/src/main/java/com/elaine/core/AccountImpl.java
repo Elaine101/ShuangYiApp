@@ -3,11 +3,19 @@ package com.elaine.core;
 import android.content.Context;
 import android.util.Log;
 
+import com.elaine.core.api.ApiResponse;
+import com.elaine.core.api.Constants;
 import com.elaine.core.api.Urls;
 import com.elaine.core.model.LocalBean;
+import com.elaine.core.net.OkHttpGetRequest;
 import com.elaine.core.net.OkHttpRequest;
+import com.elaine.core.net.ResultCallback;
+import com.elaine.core.utils.SPUtils;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.security.MessageDigest;
+import java.util.List;
 
 /**
  * AccountAction的实现
@@ -25,38 +33,74 @@ public class AccountImpl implements  AccountAction{
     }
 
     @Override
-    public void login(String moblie, String passwd, ActionCallback<LocalBean> listener) {
-        String method = "login";
+    public void login(String method,String moblie, String passwd, ActionCallback<LocalBean> listener) {
+        Type mType = new TypeToken<ApiResponse<LocalBean>>() {}.getType();
         String timestamp = getTime();
         new OkHttpRequest.Builder()
                 .url(Urls.BASE_URL)
-                .addParams("method",method)
-                .addParams("mobile",moblie)
+                .addParams(Constants.METHOD,method)
+                .addParams(Constants.MOBILE,moblie)
                 .addParams("password",MD5(passwd))
-                .addParams("timestamp",timestamp)
-                .addParams("source",SOURCE)
-                .addParams("sign",MD5(method+timestamp+SOURCE+SECERT))
-                .post(new ResponseCallback<LocalBean>(listener));
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<LocalBean>(listener,mType){
+                    @Override
+                    public void onSuccess(LocalBean result) {
+                        super.onSuccess(result);
+                    }
+                });
 
     }
 
     @Override
-    public void register(String mobile, String code, String invite_code, String password_one, String password_confirm,String timestamp,ActionCallback<Void> callback) {
+    public void register(String method, String mobile, String code, String invite_code, String password_one, String password_two, ActionCallback<List<String>> callback) {
+        Type mType = new TypeToken<ApiResponse<List<String>>>(){}.getType();
+        String timestamp = getTime();
         new OkHttpRequest.Builder()
                 .url(Urls.BASE_URL)
-                .addParams("mobile",mobile)
+                .addParams(Constants.METHOD,method)
+                .addParams(Constants.MOBILE,mobile)
                 .addParams("code",code)
                 .addParams("invite_code",invite_code)
-                .addParams("pwd_one",password_one)
-                .addParams("pwd_two",password_confirm)
-                .addParams("timestamp",timestamp)
-                .post(new ResponseCallback<Void>(callback));
-
+                .addParams("pwd_one",MD5(password_one))
+                .addParams("pwd_two",MD5(password_two))
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<List<String>>(callback,mType));
     }
 
     @Override
-    public void fogetPassword(String mobile, String pwd_one, String pwd_two, String code, String idNumLastSix, String timestamp, ActionCallback<Void> callback) {
+    public void fogetPassword(String method,String mobile, String pwd_one, String pwd_two, String code, String idNumLastSix, ActionCallback<List<String>> callback) {
+        Type mType = new TypeToken<ApiResponse<List<String>>>(){}.getType();
+        String timestamp = getTime();
+        new OkHttpRequest.Builder()
+                .url(Urls.BASE_URL)
+                .addParams(Constants.METHOD,method)
+                .addParams(Constants.MOBILE,mobile)
+                .addParams("pwd_one",MD5(pwd_one))
+                .addParams("pwd_two",MD5(pwd_two))
+                .addParams("code",code)
+                .addParams("idNumLastSix",timestamp)
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<List<String>>(callback,mType));
+    }
 
+    @Override
+    public void acquireAuthCode(String method,String mobile,ActionCallback<Void> callback) {
+        Type mType = new TypeToken<ApiResponse<Void>>(){}.getType();
+        String timestamp = getTime();
+        new OkHttpRequest.Builder()
+                .url(Urls.BASE_URL)
+                .addParams(Constants.METHOD,method)
+                .addParams(Constants.MOBILE,mobile)
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<Void>(callback,mType));
     }
 
     public String getTime(){
@@ -90,6 +134,7 @@ public class AccountImpl implements  AccountAction{
         byte[] md5Bytes = md5.digest(byteArray);
 
         StringBuffer hexValue = new StringBuffer();
+
         for( int i = 0; i < md5Bytes.length; i++)
         {
             int val = ((int)md5Bytes[i])&0xff;

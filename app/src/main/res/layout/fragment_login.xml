@@ -11,14 +11,14 @@
         android:layout_marginTop="82.5dp"/>
     <Button
         android:id="@+id/bt_back"
-        android:layout_width="13dp"
-        android:layout_height="25dp"
+        android:layout_width="@dimen/btBackWidth"
+        android:layout_height="@dimen/btBackHeight"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="2dp"
-        android:background="@drawable/btn_back_grey" />
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bt_back_grey" />
 
     <RelativeLayout
         android:layout_marginLeft="30dp"
@@ -40,17 +40,17 @@
             android:hint="@string/password"
             android:singleLine="true"
             android:textColor="@color/textColor"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:paddingBottom="20dp"
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/bt_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/btSubmitWidth"
+            android:layout_height="@dimen/btSubmitHeight"
             android:layout_below="@+id/et_password"
             android:layout_marginTop="30dp"
-            android:background="@mipmap/splash_bg_bt_blue"
+            android:background="@drawable/splash_bg_bt_blue"
             android:text="@string/login"
             android:textColor="@color/white"
             android:textSize="15sp" />

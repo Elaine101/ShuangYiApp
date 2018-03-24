@@ -5,6 +5,7 @@ import android.widget.Button;
 
 import com.elaine.shuangyiapp.R;
 import com.elaine.shuangyiapp.ui.account.LoginFragment;
+import com.elaine.shuangyiapp.ui.account.RegisterFragment;
 import com.elaine.shuangyiapp.ui.base.BaseActivity;
 
 import butterknife.BindView;
@@ -24,7 +25,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     @OnClick(R.id.bt_register) void register(){
-
+        getSupportFragmentManager().beginTransaction().add(R.id.container, new RegisterFragment()).addToBackStack("").commit();
     }
 
     @Override

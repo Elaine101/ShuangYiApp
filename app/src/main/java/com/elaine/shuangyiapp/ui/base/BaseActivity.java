@@ -106,7 +106,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true); //显示小箭头
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationIcon(R.drawable.btn_back_grey);
+        mToolbar.setNavigationIcon(R.drawable.bt_back_grey);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

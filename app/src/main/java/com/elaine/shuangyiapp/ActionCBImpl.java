@@ -1,6 +1,7 @@
 package com.elaine.shuangyiapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.elaine.core.ActionCallback;
@@ -19,12 +20,12 @@ public class ActionCBImpl<T> implements ActionCallback<T> {
 
     @Override
     public void onSuccess(T data) {
-
     }
 
     public void onFailure(int errorCode, String messge) {
         //TODO 对规定的错误的状态码进行统一的处理
         //先简单的对返回做Toast处理
+        Log.d("TAG", "onFailure: "+errorCode+messge);
         if (mContext != null)
             Toast.makeText(mContext, messge, Toast.LENGTH_SHORT).show();
     }
@@ -46,6 +47,6 @@ public class ActionCBImpl<T> implements ActionCallback<T> {
 
     @Override
     public void onError() {
-
+        Log.d("TAG", "onError: ");
     }
 }

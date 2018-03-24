@@ -1,18 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/grey"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.elaine.shuangyi.ui.MainActivity">
+    tools:context="com.elaine.shuangyiapp.ui.MainActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:minHeight="@dimen/toolbarHeight"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:id="@+id/ll_bar_scan"
+                    android:layout_marginRight="@dimen/toolbarMargin"
+                    android:layout_alignParentLeft="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_bar_left"
+                        android:layout_marginLeft="2dp"
+                        android:layout_width="@dimen/toolbarViewWidth"
+                        android:layout_height="@dimen/toolbarViewHeight"
+                        android:src="@drawable/icon_scan_gray" />
+                    <TextView
+                        android:id="@+id/tv_scan"
+                        android:layout_marginTop="1.1dp"
+                        android:text = "@string/message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_centerHorizontal="true"
+                    android:src = "@mipmap/splash_logo"
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+                <LinearLayout
+                    android:id = "@+id/ll_bar_message"
+                    android:layout_marginRight="@dimen/toolbarMargin"
+                    android:layout_alignParentRight="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_bar_right"
+                        android:layout_marginLeft="2dp"
+                        android:layout_width="@dimen/toolbarViewWidth"
+                        android:layout_height="@dimen/toolbarViewHeight"
+                        android:src="@drawable/toolbar_message" />
+                    <TextView
+                        android:id="@+id/tv_message"
+                        android:layout_marginTop="1.1dp"
+                        android:text = "@string/message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+        <RelativeLayout
+            android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/et_search"
+                android:drawablePadding="8.65dp"
+                android:drawableLeft="@drawable/iv_search"
+                android:hint="Search"
+                android:layout_marginLeft="18dp"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="44dp" />
+            <ImageView
+                android:id="@+id/iv_clear"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="18dp"
+                android:layout_centerVertical="true"
+                android:src = "@drawable/reset_password_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/main_pager_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.0" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey" />
+        <RadioGroup
+            android:id="@+id/main_tab_RadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbarHeight"
+            android:layout_gravity="bottom"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/radio_recommend"
+                android:checked="true"
+                style="@style/main_tab"
+                android:drawableTop="@drawable/tab_icon_recommend"
+                android:text="@string/recommend" />
+            <RadioButton
+                android:id="@+id/radio_classify"
+                style="@style/main_tab"
+                android:drawableTop="@drawable/tab_icon_classify"
+                android:text="@string/classify" />
+            <RadioButton
+                android:id="@+id/radio_shop"
+                android:drawablePadding="5dp"
+                style="@style/main_tab"
+                android:drawableTop="@drawable/tab_icon_store"
+                android:text="@string/shop" />
+            <RadioButton
+                android:id = "@+id/radio_alternative"
+                style="@style/main_tab"
+                android:drawableTop="@drawable/tab_icon_alternative"
+                android:drawablePadding="7dp"
+                android:text="@string/shoppingCar" />
+            <RadioButton
+                android:id="@+id/radio_me"
+                style="@style/main_tab"
+                android:drawableTop="@drawable/tab_icon_me"
+                android:drawablePadding="7dp"
+                android:text="@string/me" />
+        </RadioGroup>
+    </LinearLayout>
+     <RelativeLayout
+         android:id="@+id/container"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+     </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>

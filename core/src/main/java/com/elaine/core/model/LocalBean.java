@@ -229,7 +229,7 @@ public class LocalBean {
         return small_without_password;
     }
 
-    public Object getSmall_without_password_value() {
+    public String getSmall_without_password_value() {
         return small_without_password_value;
     }
 
@@ -267,5 +267,15 @@ public class LocalBean {
 
     public String getToken() {
         return token;
+    }
+
+    @Override
+    public String toString() {
+        return "LocalBean{" +
+                "mobile='" + mobile + '\'' +
+                ", realname='" + realname + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday='" + birthday + '\'' +
+                '}';
     }
 }

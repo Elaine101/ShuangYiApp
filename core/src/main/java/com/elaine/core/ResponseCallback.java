@@ -11,6 +11,8 @@ import com.elaine.core.api.ApiResponse;
 import com.elaine.core.net.ResultCallback;
 import com.squareup.okhttp.Request;
 
+import org.json.JSONTokener;
+
 import java.lang.reflect.Type;
 
 /**
@@ -44,22 +46,22 @@ public class ResponseCallback<T> extends ResultCallback<ApiResponse<T>> {
     public void onResponse(ApiResponse<T> response) {
         if(response!=null){
             if(response.isSuccess()){
-                if(response.isListOfT()){
-                    onSuccess(response.getObjList());
-                }else{
-                    onSuccess(response.getObj());
-                }
+                onSuccess(response.getData());
+            }
             }else{
                 onFailure(response.getCode(),response.getMsg());
             }
-        }
+
     }
+
 
     public void onSuccess(T result){
         callback.onSuccess(result);
     }
 
     public void onFailure(int errCode, String msg){
+        Log.d("TAG", "onError: "+errCode);
+        Log.d("TAG", "onError: "+msg);
         callback.onFailure(errCode,msg);
     }
 

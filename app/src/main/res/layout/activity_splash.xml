@@ -31,24 +31,23 @@
 
             <Button
                 android:id="@+id/bt_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/btSubmitWidth"
+                android:layout_height="@dimen/btSubmitHeight"
                 android:text="@string/login"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15sp"
-                android:background="@mipmap/splash_bg_bt_lucency"
+                android:background="@drawable/splash_bg_bt_lucency"
                 android:layout_marginTop="212dp"
                 android:layout_centerHorizontal="true"/>
 
             <Button
                 android:id="@+id/bt_register"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignEnd="@id/bt_login"
-                android:layout_alignRight="@id/bt_login"
                 android:layout_below="@+id/bt_login"
+                android:layout_width="@dimen/btSubmitWidth"
+                android:layout_height="@dimen/btSubmitHeight"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="24dp"
-                android:background="@mipmap/splash_bg_bt_blue"
+                android:background="@drawable/splash_bg_bt_blue"
                 android:text="@string/register"
                 android:textColor="@color/white"
                 android:textSize="15sp" />

@@ -48,12 +48,18 @@ public class LoginFragment extends BaseFragment {
        login(phoneNum,passWord);
    }
 
-
-    @OnClick(R.id.tv_fastRegister) void register(){
-
+   @OnClick(R.id.bt_back) void back(){
+       getActivity().getSupportFragmentManager().popBackStack();
    }
 
-   @OnClick(R.id.tv_fogetPassword)void fogetPassword(){}
+
+    @OnClick(R.id.tv_fastRegister) void fastRegister(){
+        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, new RegisterFragment()).addToBackStack("").commit();
+   }
+
+   @OnClick(R.id.tv_fogetPassword)void fogetPassword(){
+       getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container, new ForgetPasswordFragment()).addToBackStack("").commit();
+   }
 
     @Override
     public int setInflateId() {
@@ -62,7 +68,6 @@ public class LoginFragment extends BaseFragment {
 
     @Override
     public void init() {
-
     }
 
 
@@ -73,13 +78,11 @@ public class LoginFragment extends BaseFragment {
         waitingDialog.setIndeterminate(true);
         waitingDialog.setCancelable(false);
         waitingDialog.show();
-        Log.d("TAG", "login: "+phoneNum+" " +MD5(passWord));
 
-       ShuangYiApplication.getInstance().getAccountAction().login(phoneNum,MD5(passWord),new ActionCBImpl<LocalBean>(getActivity()){
+       ShuangYiApplication.getInstance().getAccountAction().login("login",phoneNum,passWord,new ActionCBImpl<LocalBean>(getActivity()){
            @Override
            public void onSuccess(LocalBean data) {
                super.onSuccess(data);
-               Log.d("TAG", "onSuccess: ");
                startActivity(MainActivity.class);
                getActivity().getSupportFragmentManager().popBackStack();
                getActivity().finish();

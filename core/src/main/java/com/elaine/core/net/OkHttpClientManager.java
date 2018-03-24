@@ -2,13 +2,17 @@ package com.elaine.core.net;
 
 import android.os.Handler;
 import android.os.Looper;
-
+import android.util.Log;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -95,16 +99,18 @@ public class OkHttpClientManager {
             }
 
             @Override
-            public void onResponse(final Response response) {
+                public void onResponse(final Response response) {
                 try {
                     final String string = response.body().string().trim();
+                    Log.d("tag", "onResponse: "+string);
                     if (resCallBack.mType == String.class) {
                         sendSuccessResultCallback(string, resCallBack);
                     } else {
-                        Object o = mGson.fromJson(string, resCallBack.mType);
+                        Object o = mGson.fromJson(string,resCallBack.mType);
                         sendSuccessResultCallback(o, resCallBack);
                     }
                 } catch (IOException e) {
+
                     sendFailResultCallback(response.request(), e, resCallBack);
                 } catch (com.google.gson.JsonParseException e)//Json解析的错误
                 {

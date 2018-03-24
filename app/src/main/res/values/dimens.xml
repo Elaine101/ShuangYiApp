@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btBackMarginTop">15dp</dimen>
+    <dimen name="toolbarHeight">52dp</dimen>
+    <dimen name="btBackWidth">12.85dp</dimen>
+    <dimen name="btBackHeight">21.95dp</dimen>
+    <dimen name="btSubmitWidth">315dp</dimen>
+    <dimen name="btSubmitHeight">55dp</dimen>
+    <dimen name="toolbarViewWidth">22dp</dimen>
+    <dimen name="toolbarViewHeight">20dp</dimen>
+    <dimen name="toolbarMargin">16dp</dimen>
+</resources>

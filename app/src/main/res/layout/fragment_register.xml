@@ -1,51 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@color/white"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@mipmap/splash_bg"
+    android:orientation="vertical"
     android:layout_height="match_parent">
-    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/bt_back"
+        android:layout_width="@dimen/btBackWidth"
+        android:layout_height="@dimen/btBackHeight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bt_back_grey" />
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:minHeight="?attr/actionBarSize"
-        android:layout_marginBottom="1dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
-        <ImageView
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/iv_back"
-            android:layout_width="@dimen/btBackWidth"
-            android:layout_height="@dimen/btBackHeight"
-            android:src="@drawable/bt_back_grey" />
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="找回密码"
-            android:textSize="20sp" />
-    </android.support.v7.widget.Toolbar>
-    <View
-        android:background="@color/grey"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_centerHorizontal="true"
+        android:src = "@mipmap/splash_logo"
+        android:layout_marginTop="30dp"/>
     <LinearLayout
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
         android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_below="@id/iv_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-
             android:id="@+id/et_phoneNum"
             android:hint="@string/phoneNum"
             android:textColor="@color/textColor"
-            android:layout_marginTop="15dp"
-            android:paddingBottom="20dp"
+            android:paddingBottom="15dp"
             android:singleLine="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -76,12 +64,12 @@
         <EditText
             android:id="@+id/et_password"
             android:layout_below="@id/et_auth_code"
-            android:hint="新密码"
+            android:hint="@string/loginPassword"
             android:singleLine="true"
             android:textColor="@color/textColor"
             android:layout_marginTop="15dp"
-            android:paddingBottom="20dp"
             android:layout_width="match_parent"
+            android:paddingBottom="15dp"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/et_confirm_password"
@@ -90,29 +78,48 @@
             android:singleLine="true"
             android:textColor="@color/textColor"
             android:layout_marginTop="15dp"
-            android:paddingBottom="20dp"
             android:layout_width="match_parent"
+            android:paddingBottom="15dp"
             android:layout_height="wrap_content" />
         <EditText
-            android:id="@+id/et_id_num_last_six"
+            android:id="@+id/et_invite_code"
             android:layout_below="@id/et_confirm_password"
-            android:hint="@string/idNumeLastSix"
+            android:hint="@string/invitedCode"
             android:singleLine="true"
             android:textColor="@color/textColor"
             android:layout_marginTop="15dp"
-            android:paddingBottom="20dp"
             android:layout_width="match_parent"
+            android:paddingBottom="15dp"
             android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/bt_finish"
-            android:textSize="15sp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/splash_bg_bt_blue"
-            android:textColor="@color/white"
-            android:text="@string/finish"
-            android:layout_width="@dimen/btSubmitWidth"
-            android:layout_height="@dimen/btSubmitHeight" />
     </LinearLayout>
-</LinearLayout>
+    <RelativeLayout
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_above="@id/bt_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/cb_agree"
+            android:layout_alignParentLeft="true"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_user_protocol"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="13.5dp"
+            android:layout_toRightOf="@id/cb_agree"
+            android:text="@string/userProtocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+<Button
+    android:id="@+id/bt_submit"
+    android:layout_alignParentBottom="true"
+    android:textSize="15sp"
+    android:textColor="@color/white"
+    android:text="@string/sumbit"
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="55dp" />
+</RelativeLayout>
