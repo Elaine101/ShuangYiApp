@@ -2,13 +2,26 @@ package com.elaine.shuangyiapp.ui;
 
 
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.Toolbar;
 
 import com.elaine.shuangyiapp.R;
+import com.elaine.shuangyiapp.classify.ClassifyPageFragment;
+import com.elaine.shuangyiapp.shop.AlternativePageFragment;
+import com.elaine.shuangyiapp.shop.ShopPageFragment;
+import com.elaine.shuangyiapp.ui.account.MePageFragment;
 import com.elaine.shuangyiapp.ui.base.BaseActivity;
+import com.elaine.shuangyiapp.ui.recommend.RecommendPageFragment;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,6 +36,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     EditText et_search;
     @BindView(R.id.iv_clear)
     ImageView iv_clearSearch;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.main_tab_RadioGroup)
+    RadioGroup radioGroup;
+    
 
 
 
@@ -41,11 +59,30 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     public void init() {
+        radioGroup.setOnCheckedChangeListener(this);
 
+        initData();
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId){
+            case R.id.radio_recommend :
+                break;
+            case R.id.radio_classify :
+                break;
+            case R.id.radio_shop:
+                break;
+            case R.id.radio_alternative:
+                break;
+            case R.id.radio_me:
+                break;
+        }
 
     }
+
+    public void initData(){
+
+    }
+
 }
