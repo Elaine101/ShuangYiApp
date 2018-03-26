@@ -1,6 +1,8 @@
 package com.elaine.core;
 
 import com.elaine.core.model.LocalBean;
+import com.elaine.core.model.MyInformBean;
+import com.elaine.core.model.UserInformBean;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ public interface AccountAction {
      * @param passwd   密码(用md5加密)
      */
     public void login(String method,String moblie, String passwd, ActionCallback<LocalBean> listener);
+
 
     /**
      * 注册
@@ -45,10 +48,57 @@ public interface AccountAction {
 
     /**
      * 获取验证码
-     *
      * @param method 方法名
      * @param mobile 手机号码
      */
     public void acquireAuthCode(String method,String mobile,ActionCallback<Void> callback);
+
+    /**
+     * 获取个人信息
+     * @param token
+     * @param callback
+     */
+    public void getUserInform(String method,String token,ActionCallback<UserInformBean> callback);
+
+    /**
+     * 获取可用的本金券
+     * @param method
+     * @param token
+     * @param callback
+     */
+    public void getPrincipalTotalAvail(String method,String token,ActionCallback<String>callback);
+
+    /**
+     * 获取待生效的本金券
+     * @param method
+     * @param token
+     * @param callback
+     */
+    public void getPrincipalTotalWillAvail(String method,String token,ActionCallback<String>callback);
+
+    /**
+     * 获取可用的奖励券
+     * @param method
+     * @param token
+     * @param callback
+     */
+    public void getRewardTotalAvail(String method,String token,ActionCallback<String>callback);
+
+    /**
+     * 获取待生效的奖励券
+     * @param method
+     * @param token
+     * @param callback
+     */
+    public void geRewardTotalWillAvail(String method,String token,ActionCallback<String>callback);
+
+    /**
+     * 获取我的详情页的信息
+     * @param method
+     * @param token
+     * @param callback
+     */
+    public void getMyInform(String method,String token,ActionCallback<MyInformBean>callback);
+
 
 }

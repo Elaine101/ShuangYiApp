@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rl_tab"
+        android:background="@mipmap/bg_me_page_head"
+        android:layout_width="match_parent"
+        android:layout_height="118.5dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_avatar"
+            android:src = "@drawable/iv_me_defalut_avatar"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/mePageBarMargin"
+            android:layout_width="76.5dp"
+            android:layout_height="80.5dp"/>
+        <LinearLayout
+            android:layout_toRightOf="@id/iv_avatar"
+            android:layout_marginLeft="@dimen/mePageBarMargin"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_real_name"
+                android:textSize="18sp"
+                android:layout_toRightOf="@id/iv_avatar"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_member_id"
+                android:text ="@string/memberId"
+                android:layout_marginTop="3dp"
+                android:textSize="12sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/iv_avatar"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <Button
+            android:layout_marginRight="@dimen/mePageBarMargin"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bt_back_right_white"
+            android:layout_width="@dimen/btBackWidth"
+            android:layout_height="@dimen/btBackHeight" />
+    </RelativeLayout>
+    <LinearLayout
+    android:background="@color/white"
+    android:layout_marginBottom="6dp"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+        <LinearLayout
+            android:id="@+id/ll_focus_goods"
+            android:orientation="vertical"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_focus_goods_num"
+                android:layout_gravity="center"
+                android:textSize="@dimen/textSize18"
+                android:textColor="@color/textColorLightGrey"
+                android:text="0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_gravity="center"
+                android:textSize="@dimen/textSize18"
+                android:textColor="@color/textColorLightGrey"
+                android:text="@string/focusGoods"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_focus_shop"
+            android:layout_marginTop="6dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_focus_shops_num"
+                android:textSize="@dimen/textSize18"
+                android:textColor="@color/textColorLightGrey"
+                android:layout_gravity="center"
+                android:text="0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_gravity="center"
+                android:textSize="@dimen/textSize18"
+                android:textColor="@color/textColorLightGrey"
+                android:text="@string/focusShops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+   </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_my_order"
+        android:background="@color/white"
+        android:layout_marginBottom="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/myPageItemHeight">
+
+        <TextView
+            android:id="@+id/bt_my_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/mePageBarMargin"
+            android:drawableLeft="@drawable/icon_my_order"
+            android:drawablePadding="@dimen/myPageDrawablePadding"
+            android:text="@string/myOrder"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+        <Button
+            android:layout_marginRight="@dimen/mePageBarMargin"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bt_back_right_grey"
+            android:layout_width="@dimen/btBackWidth"
+            android:layout_height="@dimen/btBackHeight" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_my_principal_coupon"
+        android:background="@color/white"
+        android:layout_marginBottom="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/myPageItemHeight">
+
+        <TextView
+            android:id="@+id/tv_my_principal_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="22dp"
+            android:drawableLeft="@drawable/icon_principal_coupon"
+            android:drawablePadding="@dimen/myPageDrawablePadding"
+            android:text="@string/myPrincipalCoupon"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize16" />
+        <Button
+            android:layout_marginRight="@dimen/mePageBarMargin"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bt_back_right_grey"
+            android:layout_width="@dimen/btBackWidth"
+            android:layout_height="@dimen/btBackHeight" />
+        <TextView
+        android:id="@+id/tv_prin_available_money"
+        android:layout_toRightOf="@id/tv_my_principal_coupon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/myPageDrawablePadding"
+        android:text="@string/availableMoney"
+        android:textColor="@color/textColorLightGrey"
+        android:textSize="@dimen/textSize12" />
+        <TextView
+            android:id="@+id/tv_prin_tbc_money"
+            android:layout_toRightOf="@id/tv_prin_available_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/mePageBarMargin"
+            android:text="@string/tbcMoney"
+            android:textColor="@color/textColorLightGrey"
+            android:textSize="@dimen/textSize12" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_my_reward_coupon"
+        android:background="@color/white"
+        android:layout_marginBottom="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/myPageItemHeight">
+
+        <TextView
+            android:id="@+id/tv_my_reward_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="22dp"
+            android:drawableLeft="@drawable/icon_reward_coupon"
+            android:drawablePadding="@dimen/myPageDrawablePadding"
+            android:text="@string/myRewardCoupon"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+        <Button
+            android:layout_marginRight="@dimen/mePageBarMargin"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bt_back_right_grey"
+            android:layout_width="@dimen/btBackWidth"
+            android:layout_height="@dimen/btBackHeight" />
+        <TextView
+            android:id="@+id/tv_reward_available_money"
+            android:layout_toRightOf="@id/tv_my_reward_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/myPageDrawablePadding"
+            android:text="@string/availableMoney"
+            android:textColor="@color/textColorLightGrey"
+            android:textSize="@dimen/textSize12" />
+        <TextView
+            android:id="@+id/tv_reward_tbc_money"
+            android:layout_toRightOf="@id/tv_reward_available_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/mePageBarMargin"
+            android:text="@string/tbcMoney"
+            android:textColor="@color/textColorLightGrey"
+            android:textSize="@dimen/textSize12" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_my_pay"
+        android:background="@color/white"
+        android:layout_marginBottom="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/myPageItemHeight">
+
+        <TextView
+            android:id="@+id/tv_my_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="22dp"
+            android:drawableLeft="@drawable/icon_my_pay"
+            android:drawablePadding="@dimen/myPageDrawablePadding"
+            android:text="@string/myPay"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+        <Button
+            android:layout_marginRight="@dimen/mePageBarMargin"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bt_back_right_grey"
+            android:layout_width="@dimen/btBackWidth"
+            android:layout_height="@dimen/btBackHeight" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_my_insurance"
+        android:background="@color/white"
+        android:layout_marginBottom="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/myPageItemHeight">
+
+        <TextView
+            android:id="@+id/tv_my_insurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="22dp"
+            android:drawableLeft="@drawable/icon_my_insurance"
+            android:drawablePadding="@dimen/myPageDrawablePadding"
+            android:text="@string/myInsurance"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+        <Button
+            android:layout_marginRight="@dimen/mePageBarMargin"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bt_back_right_grey"
+            android:layout_width="@dimen/btBackWidth"
+            android:layout_height="@dimen/btBackHeight" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_my_footPrint"
+        android:background="@color/white"
+        android:layout_marginBottom="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/myPageItemHeight">
+
+        <TextView
+            android:id="@+id/tv_my_footPrint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="22dp"
+            android:drawableLeft="@drawable/icon_footprint"
+            android:drawablePadding="@dimen/myPageDrawablePadding"
+            android:text="@string/myFootPrint"
+            android:textColor="@color/textColor"
+            android:textSize="16sp" />
+        <Button
+            android:layout_marginRight="@dimen/mePageBarMargin"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bt_back_right_grey"
+            android:layout_width="@dimen/btBackWidth"
+            android:layout_height="@dimen/btBackHeight" />
+    </RelativeLayout>
+</LinearLayout>

@@ -2,11 +2,14 @@ package com.elaine.core;
 
 import android.content.Context;
 import android.util.Log;
+import android.util.SparseArray;
 
 import com.elaine.core.api.ApiResponse;
 import com.elaine.core.api.Constants;
 import com.elaine.core.api.Urls;
 import com.elaine.core.model.LocalBean;
+import com.elaine.core.model.MyInformBean;
+import com.elaine.core.model.UserInformBean;
 import com.elaine.core.net.OkHttpGetRequest;
 import com.elaine.core.net.OkHttpRequest;
 import com.elaine.core.net.ResultCallback;
@@ -33,7 +36,7 @@ public class AccountImpl implements  AccountAction{
     }
 
     @Override
-    public void login(String method,String moblie, String passwd, ActionCallback<LocalBean> listener) {
+    public void login(final String method, final String moblie, String passwd, ActionCallback<LocalBean> listener) {
         Type mType = new TypeToken<ApiResponse<LocalBean>>() {}.getType();
         String timestamp = getTime();
         new OkHttpRequest.Builder()
@@ -48,6 +51,8 @@ public class AccountImpl implements  AccountAction{
                     @Override
                     public void onSuccess(LocalBean result) {
                         super.onSuccess(result);
+                        SPUtils.putString(mContext,Constants.MOBILE,result.getMobile());
+                        SPUtils.putString(mContext,Constants.TOKEN,result.getToken());
                     }
                 });
 
@@ -101,6 +106,90 @@ public class AccountImpl implements  AccountAction{
                 .addParams(Constants.SOURCE,SOURCE)
                 .addParams(Constants.SIGN,generateSign(method,timestamp))
                 .post(new ResponseCallback<Void>(callback,mType));
+    }
+
+    @Override
+    public void getUserInform(String method, String token, ActionCallback<UserInformBean> callback) {
+        Type mType = new TypeToken<ApiResponse<UserInformBean>>(){}.getType();
+        String timestamp = getTime();
+        new OkHttpRequest.Builder()
+                .url(Urls.BASE_URL)
+                .addParams(Constants.METHOD,method)
+                .addParams(Constants.TOKEN,token)
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<UserInformBean>(callback,mType));
+    }
+
+    @Override
+    public void getPrincipalTotalAvail(String method, String token, ActionCallback<String> callback) {
+        Type mType = new TypeToken<ApiResponse<String>>(){}.getType();
+        String timestamp = getTime();
+        new OkHttpRequest.Builder()
+                .url(Urls.BASE_URL)
+                .addParams(Constants.METHOD,method)
+                .addParams(Constants.TOKEN,token)
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<String>(callback,mType));
+    }
+
+    @Override
+    public void getPrincipalTotalWillAvail(String method, String token, ActionCallback<String> callback) {
+        Type mType = new TypeToken<ApiResponse<String>>(){}.getType();
+        String timestamp = getTime();
+        new OkHttpRequest.Builder()
+                .url(Urls.BASE_URL)
+                .addParams(Constants.METHOD,method)
+                .addParams(Constants.TOKEN,token)
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<String>(callback,mType));
+    }
+
+    @Override
+    public void getRewardTotalAvail(String method, String token, ActionCallback<String> callback) {
+        Type mType = new TypeToken<ApiResponse<String>>(){}.getType();
+        String timestamp = getTime();
+        new OkHttpRequest.Builder()
+                .url(Urls.BASE_URL)
+                .addParams(Constants.METHOD,method)
+                .addParams(Constants.TOKEN,token)
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<String>(callback,mType));
+    }
+
+    @Override
+    public void geRewardTotalWillAvail(String method, String token, ActionCallback<String> callback) {
+        Type mType = new TypeToken<ApiResponse<String>>(){}.getType();
+        String timestamp = getTime();
+        new OkHttpRequest.Builder()
+                .url(Urls.BASE_URL)
+                .addParams(Constants.METHOD,method)
+                .addParams(Constants.TOKEN,token)
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<String>(callback,mType));
+    }
+
+    @Override
+    public void getMyInform(String method, String token, ActionCallback<MyInformBean> callback) {
+        Type mType = new TypeToken<ApiResponse<MyInformBean>>(){}.getType();
+        String timestamp = getTime();
+        new OkHttpRequest.Builder()
+                .url(Urls.BASE_URL)
+                .addParams(Constants.METHOD,method)
+                .addParams(Constants.TOKEN,token)
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<MyInformBean>(callback,mType));
     }
 
     public String getTime(){

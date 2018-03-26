@@ -80,4 +80,27 @@
     <string name="shop">门店</string>
     <string name="shoppingCar">备选</string>
     <string name="me">我的</string>
+    <string name="memberId">会员卡号：</string>
+    <string name="focusShops">关注门店</string>
+    <string name="focusGoods">关注商品</string>
+    <string name="myOrder">我的订单</string>
+    <string name="myPrincipalCoupon">本金券</string>
+    <string name="myRewardCoupon">奖励券</string>
+    <string name="myPay">我的充值</string>
+    <string name="myInsurance">我的保险</string>
+    <string name="myFootPrint">我的足迹</string>
+    <string name="availableMoney">可用金额 </string>
+    <string name="tbcMoney">待生效金额 </string>
+    <string name="avatar">头像 </string>
+    <string name="name">姓名 </string>
+    <string name="sex">性别 </string>
+    <string name="birthday">出生日期 </string>
+    <string name="IdNumber">身份证号 </string>
+    <string name="carType">车型 </string>
+    <string name="carBuyTime">购车时间 </string>
+    <string name="carId">车辆牌照 </string>
+    <string name="insuranceCompany">参保公司 </string>
+    <string name="insuranceDate">参保时间 </string>
+    <string name="notAvailable">暂无 </string>
+
 </resources>

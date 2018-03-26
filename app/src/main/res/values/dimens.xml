@@ -9,4 +9,22 @@
     <dimen name="toolbarViewWidth">22dp</dimen>
     <dimen name="toolbarViewHeight">20dp</dimen>
     <dimen name="toolbarMargin">16dp</dimen>
+    <dimen name="toolbarTextSize">10dp</dimen>
+    <dimen name="mePageBarMargin">22dp</dimen>
+    <dimen name="textSize18">18sp</dimen>
+    <dimen name="myPageDrawablePadding">10dp</dimen>
+    <dimen name="myPageItemHeight">60dp</dimen>
+    <dimen name="textSize16">16sp</dimen>
+    <dimen name="textSize12">12sp</dimen>
+    <dimen name="textSize14">14sp</dimen>
+    <dimen name="textSize10">10sp</dimen>
+    <dimen name="settingItemHeight">44dp</dimen>
+    <dimen name="settingUnLoginWidth">180dp</dimen>
+    <dimen name="settingUnLoginHeight">33dp</dimen>
+    <dimen name="marginTop">6dp</dimen>
+    <dimen name="textSize6">6sp</dimen>
+    <dimen name="marginTop72dp">72dp</dimen>
+    <dimen name="marginLeft28dp">28dp</dimen>
+    <dimen name="margin38dp">38dp</dimen>
+    <dimen name="margin1dp">1dp</dimen>
 </resources>

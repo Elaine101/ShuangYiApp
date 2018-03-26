@@ -24,22 +24,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
-                    android:id="@+id/ll_bar_scan"
+                    android:id="@+id/ll_bar_left"
                     android:layout_marginRight="@dimen/toolbarMargin"
                     android:layout_alignParentLeft="true"
                     android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <ImageView
+                        android:layout_gravity="center_horizontal"
                         android:id="@+id/iv_bar_left"
-                        android:layout_marginLeft="2dp"
                         android:layout_width="@dimen/toolbarViewWidth"
                         android:layout_height="@dimen/toolbarViewHeight"
                         android:src="@drawable/icon_scan_gray" />
                     <TextView
-                        android:id="@+id/tv_scan"
+                        android:id="@+id/tv_bar_scan"
                         android:layout_marginTop="1.1dp"
-                        android:text = "@string/message"
+                        android:text = "@string/scan"
+                        android:textSize="@dimen/toolbarTextSize"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -51,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center" />
                 <LinearLayout
-                    android:id = "@+id/ll_bar_message"
+                    android:id = "@+id/ll_bar_right"
                     android:layout_marginRight="@dimen/toolbarMargin"
                     android:layout_alignParentRight="true"
                     android:orientation="vertical"
@@ -59,14 +60,16 @@
                     android:layout_height="wrap_content">
                     <ImageView
                         android:id="@+id/iv_bar_right"
-                        android:layout_marginLeft="2dp"
+                        android:layout_gravity="center_horizontal"
                         android:layout_width="@dimen/toolbarViewWidth"
                         android:layout_height="@dimen/toolbarViewHeight"
                         android:src="@drawable/toolbar_message" />
                     <TextView
-                        android:id="@+id/tv_message"
+                        android:id="@+id/tv_bar_message"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginTop="1.1dp"
                         android:text = "@string/message"
+                        android:textSize="@dimen/toolbarTextSize"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
