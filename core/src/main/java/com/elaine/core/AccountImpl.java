@@ -192,7 +192,7 @@ public class AccountImpl implements  AccountAction{
                 .post(new ResponseCallback<MyInformBean>(callback,mType));
     }
 
-    public String getTime(){
+    public static String getTime(){
 
         long time=System.currentTimeMillis();//获取系统时间的10位的时间戳
 
