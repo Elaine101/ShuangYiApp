@@ -102,5 +102,9 @@
     <string name="insuranceCompany">参保公司 </string>
     <string name="insuranceDate">参保时间 </string>
     <string name="notAvailable">暂无 </string>
+    <string name="insurance">保险 </string>
+    <string name="order">订单</string>
+    <string name="reward">奖励 </string>
+    <string name="notice">公告 </string>
 
 </resources>

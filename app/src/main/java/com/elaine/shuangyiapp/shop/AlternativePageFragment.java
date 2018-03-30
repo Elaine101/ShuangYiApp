@@ -1,5 +1,6 @@
 package com.elaine.shuangyiapp.shop;
 
+import com.elaine.shuangyiapp.R;
 import com.elaine.shuangyiapp.ui.base.BaseFragment;
 
 /**
@@ -9,7 +10,7 @@ import com.elaine.shuangyiapp.ui.base.BaseFragment;
 public class AlternativePageFragment extends BaseFragment {
     @Override
     public int setInflateId() {
-        return 0;
+        return R.layout.fragment_main_alternative_page;
     }
 
     @Override

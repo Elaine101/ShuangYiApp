@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/grey"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.youth.banner.Banner
+    android:id="@+id/banner"
+    android:layout_alignParentTop="true"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/settingUnLoginWidth">
+</com.youth.banner.Banner>
+    <LinearLayout
+        android:id="@+id/ll_head_two"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/marginTop"
+        android:layout_below="@id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="66dp">
+        <TextView
+            android:id="@+id/tv_head_insurance"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawableTop="@drawable/icon_head_insurance"
+            android:drawablePadding="@dimen/marginTop"
+            android:text="@string/insurance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <View
+            android:background="@color/grey"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/margin1dp"
+            android:layout_height="@dimen/settingUnLoginHeight"/>
+        <TextView
+            android:id="@+id/tv_head_order"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawableTop="@drawable/icon_head_order"
+            android:drawablePadding="@dimen/marginTop"
+            android:text="@string/order"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <View
+            android:background="@color/grey"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/margin1dp"
+            android:layout_height="@dimen/settingUnLoginHeight"/>
+        <TextView
+            android:id="@+id/tv_head_reward"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:drawableTop="@drawable/icon_head_reward"
+            android:drawablePadding="@dimen/marginTop"
+            android:text="@string/reward"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_notice"
+        android:orientation="horizontal"
+        android:layout_below="@id/ll_head_two"
+        android:background="@mipmap/bg_me_page_head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/settingUnLoginHeight">
+        <ImageView
+            android:layout_marginLeft="@dimen/toolbarMargin"
+            android:layout_gravity="center"
+            android:src = "@drawable/iv_hot_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize16"
+            android:text="@string/notice"
+            android:layout_marginLeft="@dimen/marginTop"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ViewFlipper
+            android:id="@+id/vflipper_notice"
+            android:layout_marginRight="@dimen/toolbarMargin"
+            android:layout_weight="1"
+            android:autoStart="true"
+            android:flipInterval="2000"
+            android:inAnimation="@anim/view_flipper_come_in"
+            android:outAnimation="@anim/view_flipper_get_out"
+            android:layout_marginLeft="@dimen/margin14dp"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>

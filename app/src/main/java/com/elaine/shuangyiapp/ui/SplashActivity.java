@@ -1,5 +1,7 @@
 package com.elaine.shuangyiapp.ui;
 
+import android.content.Intent;
+import android.os.Handler;
 import android.widget.Button;
 
 
@@ -16,17 +18,8 @@ import butterknife.OnClick;
  */
 
 public class SplashActivity extends BaseActivity {
+    private Handler handler=new Handler();
 
-    @BindView(R.id.bt_login) Button bt_login;
-    @BindView(R.id.bt_register) Button bt_register;
-
-    @OnClick(R.id.bt_login)void login(){
-        getSupportFragmentManager().beginTransaction().add(R.id.container, new LoginFragment()).addToBackStack("").commit();
-    }
-
-    @OnClick(R.id.bt_register) void register(){
-        getSupportFragmentManager().beginTransaction().add(R.id.container, new RegisterFragment()).addToBackStack("").commit();
-    }
 
     @Override
     public int setInflateId() {
@@ -35,7 +28,13 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void init() {
-
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                finish();
+            }
+        },1500);
     }
 }
 

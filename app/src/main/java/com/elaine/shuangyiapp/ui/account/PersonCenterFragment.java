@@ -1,16 +1,16 @@
-package com.elaine.shuangyiapp.classify;
+package com.elaine.shuangyiapp.ui.account;
 
 import com.elaine.shuangyiapp.R;
 import com.elaine.shuangyiapp.ui.base.BaseFragment;
 
 /**
- * Created by elaine on 2018/3/24.
+ * Created by elaine on 2018/3/26.
  */
 
-public class ClassifyPageFragment extends BaseFragment {
+public class PersonCenterFragment extends BaseFragment {
     @Override
     public int setInflateId() {
-        return R.layout.fragment_main_classify_page;
+        return R.layout.fragment_person_center;
     }
 
     @Override

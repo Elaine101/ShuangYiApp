@@ -12,17 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         android:supportsRtl="true">
+        <!--开屏页-->
         <activity
             android:name=".ui.MainActivity"
             android:theme="@style/AppTheme"
-
+            android:label="@string/app_name"
             android:exported="false"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
         </activity>
-        <!--开屏页-->
         <activity
             android:name=".ui.SplashActivity"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

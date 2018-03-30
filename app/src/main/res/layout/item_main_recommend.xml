@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
+    android:layout_marginLeft="5dp"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_pic_introduce"
+        android:src = "@drawable/iv_pic_introduce_default"
+        android:layout_width="@dimen/margin166dp"
+        android:layout_height="@dimen/margin166dp" />
+    <View
+        android:layout_below="@id/iv_pic_introduce"
+        android:background="@color/grey"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin1dp" />
+    <TextView
+        android:id="@+id/tv_introduce"
+        android:maxLines="2"
+        android:layout_margin="@dimen/margin8dp"
+        android:layout_below="@id/iv_pic_introduce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="@dimen/textSize10"
+        android:textColor="@color/textColorGreyLocation"
+        android:id="@+id/tv_location"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="@dimen/margin8dp"
+        android:layout_below="@id/tv_introduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

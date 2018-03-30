@@ -3,19 +3,28 @@ package com.elaine.shuangyiapp.adapter;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
+import com.elaine.core.model.AnnouncementBean;
+import com.elaine.core.model.BannerBean;
 import com.elaine.core.model.MainHeadBean;
 import com.elaine.shuangyiapp.R;
 import com.elaine.shuangyiapp.adapter.holder.CommonHolder;
+import com.elaine.shuangyiapp.utils.BannerImageLoader;
 import com.elaine.shuangyiapp.utils.DensityUtil;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
@@ -31,11 +40,13 @@ import butterknife.ButterKnife;
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements CommonHolder.OnNotifyChangeListener {
 
     private List<T> dataList = new ArrayList<>();
-    private MainHeadBean headData = new MainHeadBean();
 
     private boolean enableHead = false;
 
+    private MainHeadBean headData ;
+
     HeadHolder headHolder;
+
 
     ViewGroup rootView;
 
@@ -63,7 +74,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         //数据绑定
         if (enableHead) {
             if (position == 0) {
-                //头部填充数据
+                ((HeadHolder)holder).bindData(headData);
             } else {
                 ((CommonHolder) holder).bindData(dataList.get(position - 1));
             }
@@ -190,18 +201,24 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         enableHead = ifEnable;
     }
 
-
-    public void setHeadData(MainHeadBean headData) {
-        this.headData = headData;
-        if (headData.getAds()!=null&&headData.getNotices()!=null){
-            Log.d("TAG", "setHeadData: "+headData.getAds().size()+headData.getNotices().size());
-        }
+    public void setHeadData(MainHeadBean mainHeadBean){
+        headData = mainHeadBean;
         notifyDataSetChanged();
     }
 
+    public void setHeadAds(List<BannerBean.AdsEntity> adsList){
+        headData.setAds(adsList);
+        notifyDataSetChanged();
+    }
+
+    public void setHeadNotice(List<AnnouncementBean.NoticesEntity> noticesList){
+        headData.setNotices(noticesList);
+        notifyDataSetChanged();
+    }
     public CommonHolder getHeadHolder() {
         return headHolder;
     }
+
 
     /**
      * 子类重写实现自定义ViewHolder
@@ -220,9 +237,46 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         TextView tv_reward;
         @BindView(R.id.ll_notice)
         LinearLayout ll_notice;
+        @BindView(R.id.vflipper_notice)
+       ViewFlipper viewFlipper;
 
         @Override
         public void bindData(MainHeadBean mainHeadBean) {
+            //配置banner
+              List<String> imageUrls = new ArrayList<>();
+              if (mainHeadBean.getAds()!=null){
+                  for (int i=0;i<mainHeadBean.getAds().size();i++){
+                      imageUrls.add(mainHeadBean.getAds().get(i).getImgUrl());
+                  }
+              }
+
+            //设置banner样式
+            banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+            //设置图片加载器
+            banner.setImageLoader(new BannerImageLoader());
+            //设置banner动画效果
+            banner.setBannerAnimation(Transformer.RotateDown);
+            //设置图片集合
+            banner.setImages(imageUrls);
+            //设置轮播时间
+            banner.setDelayTime(3500);
+            //设置指示器位置（当banner模式中有指示器时）
+            banner.setIndicatorGravity(BannerConfig.CENTER);
+            //banner设置方法全部调用完毕时最后调用
+            banner.start();
+
+            //配置循环滚动控件
+            if (mainHeadBean.getNotices()!=null){
+                for (int i=0;i<mainHeadBean.getNotices().size();i++){
+                    TextView tv_notice = new TextView(getContext());
+                    tv_notice.setText(mainHeadBean.getNotices().get(i).getTitle());
+                    tv_notice.setTextSize(10);
+                    tv_notice.setTextColor(ColorStateList.valueOf(Color.WHITE));
+                    tv_notice.setMaxLines(2);
+                    tv_notice.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                    viewFlipper.addView(tv_notice);
+                }
+            }
 
             tv_insurance.setOnClickListener(new View.OnClickListener() {
                 @Override
