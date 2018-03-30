@@ -72,5 +72,9 @@
             android:textColor="@color/textColor"
             android:text="@string/fogetPassword" />
     </RelativeLayout>
-
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </RelativeLayout>
 </RelativeLayout>

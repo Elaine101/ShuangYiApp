@@ -2,6 +2,7 @@ package com.elaine.shuangyiapp.ui;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.elaine.core.api.Constants;
@@ -25,6 +27,7 @@ import com.elaine.shuangyiapp.R;
 import com.elaine.shuangyiapp.classify.ClassifyPageFragment;
 import com.elaine.shuangyiapp.shop.AlternativePageFragment;
 import com.elaine.shuangyiapp.shop.ShopPageFragment;
+import com.elaine.shuangyiapp.ui.account.LoginActivity;
 import com.elaine.shuangyiapp.ui.account.LoginFragment;
 import com.elaine.shuangyiapp.ui.account.MePageFragment;
 import com.elaine.shuangyiapp.ui.account.SettingFragment;
@@ -63,6 +66,12 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     TextView tv_barMessage;
     @BindView(R.id.tv_bar_scan)
     TextView tv_barScan;
+    @BindView(R.id.et_search_shop)
+    EditText et_toolbar_search;
+    @BindView(R.id.iv_logo)
+    ImageView iv_logo;
+    @BindView(R.id.rl_search)
+    RelativeLayout rl_search;
 
     private int currentFragmenId = -1;
     public RecommendPageFragment recommendPageFragment;
@@ -110,14 +119,16 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
             case R.id.radio_alternative:
                 if (TextUtils.isEmpty(SPUtils.getString(this,Constants.TOKEN))){
-                  getSupportFragmentManager().beginTransaction().add(R.id.container, new LoginFragment()).addToBackStack("").commit();
+                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    finish();
                 }else {
                     setFragment(3);
                 }
                 break;
             case R.id.radio_me:
                 if (TextUtils.isEmpty(SPUtils.getString(this,Constants.TOKEN))){
-                    getSupportFragmentManager().beginTransaction().add(R.id.container, new LoginFragment()).addToBackStack("").commit();
+                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                    finish();
                 }else {
                 setFragment(4);
                 }
@@ -134,15 +145,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
     public void setFragment(int fragmentId){
-        if (fragmentId==4){
-            tv_barScan.setVisibility(View.GONE);
-            tv_barMessage.setVisibility(View.GONE);
-            iv_barLeft.setImageResource(R.drawable.iv_setting);
-        }else {
-            tv_barMessage.setVisibility(View.VISIBLE);
-            tv_barScan.setVisibility(View.VISIBLE);
-            iv_barLeft.setImageResource(R.drawable.icon_scan_gray);
-        }
         if (currentFragmenId !=fragmentId){
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             Fragment currentFragment = getFragment(fragmentId);
@@ -172,33 +174,60 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 if(recommendPageFragment == null){
                     recommendPageFragment = new RecommendPageFragment();
                 }
+                tv_barMessage.setVisibility(View.VISIBLE);
+                tv_barScan.setVisibility(View.VISIBLE);
+                iv_barLeft.setImageResource(R.drawable.icon_scan_gray);
+                iv_logo.setVisibility(View.VISIBLE);
+                et_toolbar_search.setVisibility(View.GONE);
+                rl_search.setVisibility(View.VISIBLE);
                 return recommendPageFragment;
             //classifyPage 分类页
             case 1:
                 if (classifyPageFragment == null){
                     classifyPageFragment = new ClassifyPageFragment();
                 }
-
-                return classifyPageFragment;
+                tv_barMessage.setVisibility(View.VISIBLE);
+                tv_barScan.setVisibility(View.VISIBLE);
+                iv_barLeft.setImageResource(R.drawable.icon_scan_gray);
+                iv_logo.setVisibility(View.VISIBLE);
+                et_toolbar_search.setVisibility(View.GONE);
+                rl_search.setVisibility(View.VISIBLE);
+            return classifyPageFragment;
             //shopPage 商店页
             case 2:
                 if (shopPageFragment == null){
                     shopPageFragment = new ShopPageFragment();
                 }
+                tv_barMessage.setVisibility(View.VISIBLE);
+                tv_barScan.setVisibility(View.VISIBLE);
+                iv_barLeft.setImageResource(R.drawable.icon_scan_gray);
+                iv_logo.setVisibility(View.VISIBLE);
+                et_toolbar_search.setVisibility(View.GONE);
+                rl_search.setVisibility(View.VISIBLE);
                 return shopPageFragment;
             //alternativePage 购物车页
             case 3:
                 if (alternativePageFragment == null){
                     alternativePageFragment = new AlternativePageFragment();
                 }
-
+                tv_barMessage.setVisibility(View.VISIBLE);
+                tv_barScan.setVisibility(View.VISIBLE);
+                iv_barLeft.setImageResource(R.drawable.icon_scan_gray);
+                iv_logo.setVisibility(View.GONE);
+                et_toolbar_search.setVisibility(View.VISIBLE);
+                rl_search.setVisibility(View.GONE);
                return alternativePageFragment;
             //mePage 个人页面
             case 4:
                 if (mePageFragment == null){
                     mePageFragment = new MePageFragment();
                 }
-
+                tv_barScan.setVisibility(View.GONE);
+                tv_barMessage.setVisibility(View.GONE);
+                iv_barLeft.setImageResource(R.drawable.iv_setting);
+                iv_logo.setVisibility(View.VISIBLE);
+                et_toolbar_search.setVisibility(View.GONE);
+                rl_search.setVisibility(View.VISIBLE);
                 return mePageFragment;
             default:
                 break;
@@ -218,5 +247,5 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         currentFragmenId = savedInstanceState.getInt(CURRENTPOSITION);
         setFragment(currentFragmenId);
         super.onRestoreInstanceState(savedInstanceState);
-    }
+    };
 }

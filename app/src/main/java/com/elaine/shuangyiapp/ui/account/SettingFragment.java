@@ -46,8 +46,9 @@ public class SettingFragment extends BaseFragment {
 
     @OnClick(R.id.bt_log_out) void logOut(){
         SPUtils.clear(getContext());
-        getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.container,new LoginFragment(),"").addToBackStack("").commit();
+        Intent startActivityIntent = new Intent(getContext(), LoginActivity.class);
+        startActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        getContext().startActivity(startActivityIntent);
     }
 
     @Override

@@ -43,10 +43,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     private boolean enableHead = false;
 
-    private MainHeadBean headData ;
-
-    HeadHolder headHolder;
-
 
     ViewGroup rootView;
 
@@ -54,17 +50,12 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     public static final int TYPE_CONTENT = 1;
 
 
+    ////若子类需要使用head，则需要重写该方法，返回所需要的头部的类型
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
         rootView = parent;
         //设置ViewHolder
-        int type = getItemViewType(position);
-        if (type == TYPE_HEAD) {
-            headHolder = new HeadHolder(rootView.getContext(),rootView);
-            return headHolder;
-        } else {
-            return setViewHolder(parent);
-        }
+        return setViewHolder(parent);
     }
 
 
@@ -74,7 +65,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         //数据绑定
         if (enableHead) {
             if (position == 0) {
-                ((HeadHolder)holder).bindData(headData);
+                //在子类里帮定
             } else {
                 ((CommonHolder) holder).bindData(dataList.get(position - 1));
             }
@@ -100,7 +91,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     @Override
     public int getItemViewType(int position) {
         if (enableHead) {
-            if (position == 0) {
+            if (position == TYPE_HEAD) {
                 return TYPE_HEAD;
             } else {
                 return TYPE_CONTENT;
@@ -193,30 +184,12 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
 
     /**
-     * 设置是否显示head
+     * 设置是否显示head ,子类需要自己实现head 的data数据的绑定
      *
      * @param ifEnable 是否显示头部
      */
     public void setEnableHead(boolean ifEnable) {
         enableHead = ifEnable;
-    }
-
-    public void setHeadData(MainHeadBean mainHeadBean){
-        headData = mainHeadBean;
-        notifyDataSetChanged();
-    }
-
-    public void setHeadAds(List<BannerBean.AdsEntity> adsList){
-        headData.setAds(adsList);
-        notifyDataSetChanged();
-    }
-
-    public void setHeadNotice(List<AnnouncementBean.NoticesEntity> noticesList){
-        headData.setNotices(noticesList);
-        notifyDataSetChanged();
-    }
-    public CommonHolder getHeadHolder() {
-        return headHolder;
     }
 
 
@@ -225,89 +198,4 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
      */
     public abstract CommonHolder<T> setViewHolder(ViewGroup parent);
 
-
-   static class HeadHolder extends CommonHolder<MainHeadBean> {
-        @BindView(R.id.banner)
-        Banner banner;
-        @BindView(R.id.tv_head_insurance)
-        TextView tv_insurance;
-        @BindView(R.id.tv_head_order)
-        TextView tv_order;
-        @BindView(R.id.tv_head_reward)
-        TextView tv_reward;
-        @BindView(R.id.ll_notice)
-        LinearLayout ll_notice;
-        @BindView(R.id.vflipper_notice)
-       ViewFlipper viewFlipper;
-
-        @Override
-        public void bindData(MainHeadBean mainHeadBean) {
-            //配置banner
-              List<String> imageUrls = new ArrayList<>();
-              if (mainHeadBean.getAds()!=null){
-                  for (int i=0;i<mainHeadBean.getAds().size();i++){
-                      imageUrls.add(mainHeadBean.getAds().get(i).getImgUrl());
-                  }
-              }
-
-            //设置banner样式
-            banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
-            //设置图片加载器
-            banner.setImageLoader(new BannerImageLoader());
-            //设置banner动画效果
-            banner.setBannerAnimation(Transformer.RotateDown);
-            //设置图片集合
-            banner.setImages(imageUrls);
-            //设置轮播时间
-            banner.setDelayTime(3500);
-            //设置指示器位置（当banner模式中有指示器时）
-            banner.setIndicatorGravity(BannerConfig.CENTER);
-            //banner设置方法全部调用完毕时最后调用
-            banner.start();
-
-            //配置循环滚动控件
-            if (mainHeadBean.getNotices()!=null){
-                for (int i=0;i<mainHeadBean.getNotices().size();i++){
-                    TextView tv_notice = new TextView(getContext());
-                    tv_notice.setText(mainHeadBean.getNotices().get(i).getTitle());
-                    tv_notice.setTextSize(10);
-                    tv_notice.setTextColor(ColorStateList.valueOf(Color.WHITE));
-                    tv_notice.setMaxLines(2);
-                    tv_notice.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                    viewFlipper.addView(tv_notice);
-                }
-            }
-
-            tv_insurance.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("TAG", "onClick: insurance");
-                }
-            });
-            tv_order.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Log.d("TAG", "onClick: order");
-                    }
-                });
-            tv_reward.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("TAG", "onClick: reward");
-                }
-            });
-            ll_notice.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("TAG", "onClick: notice");
-                }
-            });
-        }
-
-
-        public HeadHolder(Context context, ViewGroup root) {
-            super(context, root, R.layout.item_main_recommend_head);
-        }
-
-    }
 }

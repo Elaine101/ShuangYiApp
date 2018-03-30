@@ -32,4 +32,10 @@
     <dimen name="margin14dp">14dp</dimen>
     <dimen name="margin238dp">238dp</dimen>
     <dimen name="margin8dp">8dp</dimen>
+    <dimen name="margin120dp">120dp</dimen>
+    <dimen name="margin12dp">12dp</dimen>
+    <dimen name="margin18dp">18dp</dimen>
+    <dimen name="margin23dp">23.5dp</dimen>
+    <dimen name="margin4dp">4dp</dimen>
+    <dimen name="textSize9sp">9sp</dimen>
 </resources>

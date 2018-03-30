@@ -9,4 +9,6 @@
     <color name="textColorLightGrey">#9F9F9F  </color>
     <color name="textColorGreySetting">#9B9B9B</color>
     <color name="textColorGreyLocation">#939393</color>
+    <color name="colorGreyToolbarSearch">#F5F5F5 </color>
+    <color name="textGreyShopName">#4A4A4A  </color>
 </resources>
