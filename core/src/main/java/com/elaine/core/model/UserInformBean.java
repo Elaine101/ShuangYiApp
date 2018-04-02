@@ -40,33 +40,33 @@ public class UserInformBean {
 
     private String mobile;
     private String password;
-    private Object realname;
-    private Object sex;
+    private String realname;
+    private String sex;
     private String birthday;
     private String car_type;
-    private Object car_number;
+    private String car_number;
     private String car_buytime;
-    private Object headimg;
-    private Object idnum;
+    private String headimg;
+    private String idnum;
     private String insurance_company;
     private String insurance_time;
     private String addtime;
     private String activate_type;
     private String activate_time;
     private String status;
-    private Object pay_password;
+    private String pay_password;
     private String small_without_password;
-    private Object small_without_password_value;
+    private String small_without_password_value;
     private String pay_qr_code;
     private String isvip;
     private String isbig;
     private String member_card;
     private String large_yue;
-    private Object msg_remind;
+    private String msg_remind;
     private String invited_code;
-    private Object client_id;
-    private Object car_type_id;
-    private Object insurance_company_id;
+    private String client_id;
+    private String car_type_id;
+    private String insurance_company_id;
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
@@ -76,11 +76,11 @@ public class UserInformBean {
         this.password = password;
     }
 
-    public void setRealname(Object realname) {
+    public void setRealname(String realname) {
         this.realname = realname;
     }
 
-    public void setSex(Object sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -92,7 +92,7 @@ public class UserInformBean {
         this.car_type = car_type;
     }
 
-    public void setCar_number(Object car_number) {
+    public void setCar_number(String car_number) {
         this.car_number = car_number;
     }
 
@@ -100,11 +100,11 @@ public class UserInformBean {
         this.car_buytime = car_buytime;
     }
 
-    public void setHeadimg(Object headimg) {
+    public void setHeadimg(String headimg) {
         this.headimg = headimg;
     }
 
-    public void setIdnum(Object idnum) {
+    public void setIdnum(String idnum) {
         this.idnum = idnum;
     }
 
@@ -132,7 +132,7 @@ public class UserInformBean {
         this.status = status;
     }
 
-    public void setPay_password(Object pay_password) {
+    public void setPay_password(String pay_password) {
         this.pay_password = pay_password;
     }
 
@@ -140,7 +140,7 @@ public class UserInformBean {
         this.small_without_password = small_without_password;
     }
 
-    public void setSmall_without_password_value(Object small_without_password_value) {
+    public void setSmall_without_password_value(String small_without_password_value) {
         this.small_without_password_value = small_without_password_value;
     }
 
@@ -164,7 +164,7 @@ public class UserInformBean {
         this.large_yue = large_yue;
     }
 
-    public void setMsg_remind(Object msg_remind) {
+    public void setMsg_remind(String msg_remind) {
         this.msg_remind = msg_remind;
     }
 
@@ -172,15 +172,15 @@ public class UserInformBean {
         this.invited_code = invited_code;
     }
 
-    public void setClient_id(Object client_id) {
+    public void setClient_id(String client_id) {
         this.client_id = client_id;
     }
 
-    public void setCar_type_id(Object car_type_id) {
+    public void setCar_type_id(String car_type_id) {
         this.car_type_id = car_type_id;
     }
 
-    public void setInsurance_company_id(Object insurance_company_id) {
+    public void setInsurance_company_id(String insurance_company_id) {
         this.insurance_company_id = insurance_company_id;
     }
 
@@ -192,11 +192,11 @@ public class UserInformBean {
         return password;
     }
 
-    public Object getRealname() {
+    public String getRealname() {
         return realname;
     }
 
-    public Object getSex() {
+    public String getSex() {
         return sex;
     }
 
@@ -208,7 +208,7 @@ public class UserInformBean {
         return car_type;
     }
 
-    public Object getCar_number() {
+    public String getCar_number() {
         return car_number;
     }
 
@@ -216,7 +216,7 @@ public class UserInformBean {
         return car_buytime;
     }
 
-    public Object getHeadimg() {
+    public String getHeadimg() {
         return headimg;
     }
 

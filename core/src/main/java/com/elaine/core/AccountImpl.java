@@ -7,6 +7,8 @@ import android.util.SparseArray;
 import com.elaine.core.api.ApiResponse;
 import com.elaine.core.api.Constants;
 import com.elaine.core.api.Urls;
+import com.elaine.core.model.CarLevelBean;
+import com.elaine.core.model.InsuranceCompanyBean;
 import com.elaine.core.model.LocalBean;
 import com.elaine.core.model.MyInformBean;
 import com.elaine.core.model.UserInformBean;
@@ -190,6 +192,37 @@ public class AccountImpl implements  AccountAction{
                 .addParams(Constants.SOURCE,SOURCE)
                 .addParams(Constants.SIGN,generateSign(method,timestamp))
                 .post(new ResponseCallback<MyInformBean>(callback,mType));
+    }
+
+    @Override
+    public void getAllInsuranceCompany(String method, ActionCallback<InsuranceCompanyBean> callback) {
+         Type mType = new TypeToken<ApiResponse<InsuranceCompanyBean>>(){}.getType();
+         String timestamp = getTime();
+         new OkHttpRequest.Builder()
+                 .url(Urls.BASE_URL)
+                 .addParams(Constants.METHOD,method)
+                 .addParams(Constants.TIMESTAMP,timestamp)
+                 .addParams(Constants.SOURCE,SOURCE)
+                 .addParams(Constants.SIGN,generateSign(method,timestamp))
+                 .post(new ResponseCallback<InsuranceCompanyBean>(callback,mType));
+    }
+
+    @Override
+    public void suppleInformation(String method, String token, String headImg, String realname, String sex, String idnum, String birthday, String carType, String car_buyTime, String car_number, String insurance_company, String insurance_time, ActionCallback<String> callback) {
+
+    }
+
+    @Override
+    public void getCarLevel(String method, ActionCallback<CarLevelBean> callback) {
+        Type mType = new TypeToken<ApiResponse<CarLevelBean>>(){}.getType();
+        String timestamp = getTime();
+        new OkHttpRequest.Builder()
+                .url(Urls.BASE_URL)
+                .addParams(Constants.METHOD,method)
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<CarLevelBean>(callback,mType));
     }
 
     public static String getTime(){

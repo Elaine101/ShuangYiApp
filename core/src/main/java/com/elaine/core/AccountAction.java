@@ -1,5 +1,7 @@
 package com.elaine.core;
 
+import com.elaine.core.model.CarLevelBean;
+import com.elaine.core.model.InsuranceCompanyBean;
 import com.elaine.core.model.LocalBean;
 import com.elaine.core.model.MyInformBean;
 import com.elaine.core.model.UserInformBean;
@@ -99,6 +101,38 @@ public interface AccountAction {
      * @param callback
      */
     public void getMyInform(String method,String token,ActionCallback<MyInformBean>callback);
+
+    /**
+     * 获取所有的保险公司
+     * @param method
+     * @param callback
+     */
+    public void getAllInsuranceCompany(String method, ActionCallback<InsuranceCompanyBean> callback);
+
+    /**
+     *
+     * @param method
+     * @param token
+     * @param headImg  头像
+     * @param realname 真名
+     * @param sex 性别
+     * @param idnum  身份证号
+     * @param birthday 生日
+     * @param carType  汽车类型
+     * @param car_buyTime 汽车购买时间
+     * @param car_number  车牌号
+     * @param insurance_company  保险公司
+     * @param insurance_time  参保日期
+     * @param callback
+     */
+    public void suppleInformation(String method,String token,String headImg,String realname,String sex,String idnum,String birthday,String carType,String car_buyTime,String car_number,String insurance_company,String insurance_time, ActionCallback<String> callback);
+
+    /**
+     * 获得车类型列表
+     * @param method
+     * @param callback
+     */
+    public void getCarLevel(String method,ActionCallback<CarLevelBean> callback);
 
 
 }

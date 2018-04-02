@@ -32,4 +32,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation files('libs/gson-2.2.1.jar')
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+    //二维码解析
+    compile files('libs/zxing.jar')
 }
