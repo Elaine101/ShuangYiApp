@@ -220,7 +220,7 @@ public class UserInformBean {
         return headimg;
     }
 
-    public Object getIdnum() {
+    public String getIdnum() {
         return idnum;
     }
 
@@ -248,7 +248,7 @@ public class UserInformBean {
         return status;
     }
 
-    public Object getPay_password() {
+    public String getPay_password() {
         return pay_password;
     }
 
@@ -256,7 +256,7 @@ public class UserInformBean {
         return small_without_password;
     }
 
-    public Object getSmall_without_password_value() {
+    public String getSmall_without_password_value() {
         return small_without_password_value;
     }
 
@@ -280,7 +280,7 @@ public class UserInformBean {
         return large_yue;
     }
 
-    public Object getMsg_remind() {
+    public String getMsg_remind() {
         return msg_remind;
     }
 
@@ -288,15 +288,15 @@ public class UserInformBean {
         return invited_code;
     }
 
-    public Object getClient_id() {
+    public String getClient_id() {
         return client_id;
     }
 
-    public Object getCar_type_id() {
+    public String getCar_type_id() {
         return car_type_id;
     }
 
-    public Object getInsurance_company_id() {
+    public String getInsurance_company_id() {
         return insurance_company_id;
     }
 }

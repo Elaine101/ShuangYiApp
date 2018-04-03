@@ -1,11 +1,15 @@
 package com.elaine.shuangyiapp.ui.account;
 
 import android.app.AlertDialog;
+import android.app.Application;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.CircularProgressDrawable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -18,14 +22,18 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.elaine.core.api.Constants;
+import com.elaine.core.model.CarBrandBean;
 import com.elaine.core.model.CarLevelBean;
+import com.elaine.core.model.CarTypeBean;
 import com.elaine.core.model.InsuranceCompanyBean;
 import com.elaine.core.model.UserInformBean;
 import com.elaine.core.utils.SPUtils;
@@ -36,6 +44,7 @@ import com.elaine.shuangyiapp.tools.GlideImageLoader;
 import com.elaine.shuangyiapp.ui.base.BaseActivity;
 import com.elaine.shuangyiapp.ui.base.BaseFragment;
 import com.elaine.shuangyiapp.utils.ScreenUtils;
+import com.elaine.shuangyiapp.views.ProgressWheel;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -44,6 +53,7 @@ import com.lzy.imagepicker.view.CropImageView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Map;
 
@@ -79,6 +89,8 @@ public class PersonCenterActivity extends BaseActivity {
     RadioButton rb_female;
     @BindView(R.id.et_id_number)
     EditText et_id_number;
+    @BindView(R.id.et_car_id)
+    EditText et_carId;
     @BindView(R.id.tv_birthday)
     TextView tv_birthday;
     @BindView(R.id.tv_car_buy_time)
@@ -96,14 +108,23 @@ public class PersonCenterActivity extends BaseActivity {
     @BindView(R.id.right_list_view)
     ListView right_listView;
 
+    private String avatarPath;
     private Calendar calendar;
     private  int year,month,day;
     private long today;
-    private List<String> insuranceCompanyList;
+    private static int type = 0; //判断车型列表当前处于哪一页
     private UserInformBean userInform;
-    private List<String> carLevelList;
+    private String carLevel;
+    private String carBrand;
+    private String carType;
+    private List<String> insuranceCompanyList;
+    private List<String> carList;
     private ArrayAdapter<String> arrayAdapter;
     private Map<String,String> carLevelMap;
+    private Map<String,String> carBrandMap;
+    private Map<String,String> carTypeMap;
+
+    private ProgressWheel  progressWheel;
 
     @OnClick(R.id.iv_back) void back(){
          finish();
@@ -147,13 +168,98 @@ public class PersonCenterActivity extends BaseActivity {
     @OnClick(R.id.rl_car_type) void setCarType(){
         if (!drawerLayout.isDrawerOpen(rl_right)){
             drawerLayout.openDrawer(rl_right);
+            if (type!=1){
+                carList.clear();
+                carList.addAll(new ArrayList<String>(carLevelMap.keySet()));
+                arrayAdapter.notifyDataSetChanged();
+                type = 1;
+            }
+
+            Log.d("TAG", "onItemClick: "+type);
         }
     }
     @OnClick(R.id.bt_save) void save(){
+        if (TextUtils.isEmpty(avatarPath)){
+            showToast("请设置头像");
+        }
+        if (TextUtils.isEmpty(et_name.getText())){
+            showToast("请输入真实姓名");
+        }
+        if (TextUtils.isEmpty(et_id_number.getText())){
+            showToast("请输入身份证号码");
+        }
+        if (TextUtils.isEmpty(tv_birthday.getText())){
+            showToast("请输入生日号码");
+        }
+        if (TextUtils.isEmpty(tv_car_type.getText())){
+            showToast("请输入您车的类型");
+        }
+        if (TextUtils.isEmpty(tv_carBuyTime.getText())){
+            showToast("请输入您车购买的时间");
+        }
+        if (TextUtils.isEmpty(tv_carBuyTime.getText())){
+            showToast("请输入您车购买的时间");
+        }
+        if (TextUtils.isEmpty(et_carId.getText())){
+            showToast("请输入您的车牌号码");
+        }
+        if (TextUtils.isEmpty(tv_insuranceCompany.getText())){
+            showToast("请输入您车的保险公司");
+        }
+        if (TextUtils.isEmpty(tv_insuranceDate.getText())){
+            showToast("请输入您办理保险的时间");
+        }
+        submitResult();
 
     }
-    @OnClick(R.id.iv_back_to_center)void backToCenter(){
-        drawerLayout.closeDrawer(rl_right);
+    //提交结果
+    private void submitResult() {
+        Log.d("TAG", "submitResult: "+avatarPath);
+        String sex;
+        if (rb_male.isChecked()){
+            sex = "1";
+        }else {
+            sex = "0";
+        }
+        ShuangYiApplication.getInstance().getAccountAction().suppleInformation("supplement_information",
+                SPUtils.getString(this,Constants.TOKEN),
+                "http://abc",
+                et_name.getText().toString().trim(),
+                sex,
+                et_id_number.getText().toString().trim(),
+                tv_birthday.getText().toString().trim(),
+                tv_car_type.getText().toString().trim(),
+                tv_carBuyTime.getText().toString().trim(),
+                et_carId.getText().toString().trim(),
+                tv_insuranceCompany.getText().toString().trim(),
+                tv_insuranceDate.getText().toString().trim(),
+                new ActionCBImpl<String>(this){
+                    @Override
+                    public void onSuccess(String data) {
+                        super.onSuccess(data);
+                        showToast("修改成功");
+                    }
+                }
+                );
+    }
+
+    @OnClick(R.id.iv_back_to_center)void backList(){
+        if (type ==1){
+            drawerLayout.closeDrawer(rl_right);
+        }else if (type ==2){
+            carList.clear();
+            carList.addAll(carLevelMap.keySet());
+            arrayAdapter.notifyDataSetChanged();
+            type = 1;
+        } else if (type ==3){
+            carList.clear();
+            carList.addAll(carBrandMap.keySet());
+            arrayAdapter.notifyDataSetChanged();
+            type = 2;
+        } else {
+            drawerLayout.closeDrawer(rl_right);
+        }
+
     }
 
     Handler handler = new Handler(){
@@ -162,8 +268,17 @@ public class PersonCenterActivity extends BaseActivity {
             super.handleMessage(msg);
             switch (msg.what){
                 case 0:
-                    arrayAdapter = new ArrayAdapter<String>(PersonCenterActivity.this,android.R.layout.simple_spinner_dropdown_item,carLevelList);
-                    right_listView.setAdapter(arrayAdapter);
+                    type = 1;
+                    arrayAdapter.notifyDataSetChanged();
+                    break;
+                case 1:
+                case 2:
+                    arrayAdapter.notifyDataSetChanged();
+                    progressWheel.dismiss();
+                    break;
+                case 3:
+                    arrayAdapter.notifyDataSetChanged();
+                    progressWheel.dismiss();
             }
         }
     };
@@ -175,7 +290,6 @@ public class PersonCenterActivity extends BaseActivity {
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
         today = calendar.getTimeInMillis();
-        Log.d("TAG", "getDate: "+"年"+year+"月"+month+"日"+day);
 
     }
 
@@ -192,18 +306,35 @@ public class PersonCenterActivity extends BaseActivity {
         //设置CarType的那个drawer关闭手势滑动
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
-        userInform = new UserInformBean();
         insuranceCompanyList = new ArrayList<>();
-        carLevelList = new ArrayList<>();
+        carList = new ArrayList<>();
         carLevelMap = new HashMap<>();
+        carBrandMap = new HashMap<>();
+        carTypeMap = new HashMap<>();
+        userInform = new UserInformBean();
+        arrayAdapter = new ArrayAdapter<String>(PersonCenterActivity.this,android.R.layout.simple_spinner_dropdown_item,carList);
+        right_listView.setAdapter(arrayAdapter);
         right_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("TAG", "onItemClick: "+carLevelList.get(position)+carLevelMap.get(carLevelList.get(position)));
-                drawerLayout.closeDrawer(rl_right);
+                if (type ==1){
+                    carLevel = ((TextView)view).getText().toString();
+                    Log.d("TAG", "onItemClick: "+carLevel );
+                    getCarType(carLevelMap.get(carLevel),null);
+                }else if (type ==2){
+                    carBrand = ((TextView)view).getText().toString();
+                    Log.d("TAG", "onItemClick: "+carLevelMap.get(carLevel) +carBrandMap.get(carBrand));
+                    getCarType(carLevelMap.get(carLevel),carBrandMap.get(carBrand));
+                } else if (type ==3){
+                    carType =((TextView)view).getText().toString();
+                    Log.d("TAG", "onItemClick: "+carType);
+                    tv_car_type.setText(carType);
+                    drawerLayout.closeDrawer(rl_right);
+                }
+
             }
         });
-
+        progressWheel = new ProgressWheel(this);
         initData();
         initInternetRequest();
 
@@ -221,12 +352,36 @@ public class PersonCenterActivity extends BaseActivity {
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .error(R.drawable.iv_me_defalut_avatar)
                         .into(iv_avatar);
-                if (TextUtils.isEmpty(data.getSex())){
+                if (TextUtils.isEmpty(data.getSex())||data.getSex().equals("1")){
                     rb_male.setChecked(true);
+                    rb_female.setChecked(false);
                 }else {
-
+                    rb_male.setChecked(false);
+                    rb_female.setChecked(true);
                 }
                 tv_birthday.setText(data.getBirthday());
+                et_name.setText(userInform.getRealname());
+                if (!TextUtils.isEmpty(tv_birthday.getText())){
+                    tv_birthday.setText(userInform.getBirthday());
+                }
+                if (!TextUtils.isEmpty(et_id_number.getText())){
+                    et_carId.setText(userInform.getIdnum());
+                }
+                if (!TextUtils.isEmpty(tv_car_type.getText())){
+                    tv_car_type.setText(userInform.getCar_type());
+                }
+                if (!TextUtils.isEmpty(tv_carBuyTime.getText())){
+                    tv_carBuyTime.setText(userInform.getCar_buytime());
+                }
+                if (!TextUtils.isEmpty(et_carId.getText())){
+                    et_carId.setText(userInform.getCar_type_id());
+                }
+                if (!TextUtils.isEmpty(tv_insuranceCompany.getText())){
+                    tv_insuranceCompany.setText(userInform.getInsurance_company());
+                }
+                if (!TextUtils.isEmpty(tv_insuranceDate.getText())){
+                    tv_insuranceDate.setText(userInform.getInsurance_time());
+                }
 
 
             }
@@ -241,7 +396,7 @@ public class PersonCenterActivity extends BaseActivity {
             Log.d("TAG", "onActivityResult: "+resultCode);
             if (data !=null&& requestCode == 1){
                 ArrayList<ImageItem> imageItems = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-                String avatarPath = imageItems.get(0).path;
+                avatarPath = imageItems.get(0).path;
                 Log.d("TAG", "onActivityResult: "+avatarPath);
                 Glide.with(this).load(avatarPath).diskCacheStrategy(DiskCacheStrategy.NONE).into(iv_avatar);
             }
@@ -267,7 +422,51 @@ public class PersonCenterActivity extends BaseActivity {
       internetThread.start();
     }
 
-    public void getBrandByLevel(){}
+    public void getCarType(final String carLevel, final String carBrand){
+        progressWheel.show();
+        if (carBrand==null){
+            type = 2;
+            Thread getLevelThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    ShuangYiApplication.getInstance().getAccountAction().getCarBrandByLevel("get_brand_by_level",carLevel,new ActionCBImpl<CarBrandBean>(getApplicationContext()){
+                        @Override
+                        public void onSuccess(CarBrandBean data) {
+                            super.onSuccess(data);
+                            carList.clear();
+                            for(int i=0;i<data.getResData().size();i++){
+                                carList.add(data.getResData().get(i).getName());
+                                carBrandMap.put(data.getResData().get(i).getName(),data.getResData().get(i).getId());
+                            }
+                            handler.sendEmptyMessage(2);
+                        }
+                    });
+                }
+            });
+            getLevelThread.start();
+        }else {
+            type = 3;
+            Thread getTypeThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    ShuangYiApplication.getInstance().getAccountAction().getCarType("get_car_type",carBrand,carLevel,new ActionCBImpl<CarTypeBean>(getApplicationContext()){
+                        @Override
+                        public void onSuccess(CarTypeBean data) {
+                            super.onSuccess(data);
+                            carList.clear();
+                            for (int i=0;i<data.getResData().size();i++){
+                                carList.add(data.getResData().get(i).getName());
+                                carTypeMap.put(data.getResData().get(i).getName(),data.getResData().get(i).getId());
+                            }
+                            handler.sendEmptyMessage(3);
+                        }
+                    });
+                }
+            });
+            getTypeThread.start();
+        }
+
+    }
 
     class InternetThread extends Thread{
         @Override
@@ -277,7 +476,7 @@ public class PersonCenterActivity extends BaseActivity {
                 public void onSuccess(CarLevelBean data) {
                     super.onSuccess(data);
                     for(int i=0;i<data.getResData().size();i++){
-                        carLevelList.add(data.getResData().get(i).getName());
+                        carList.add(data.getResData().get(i).getName());
                         carLevelMap.put(data.getResData().get(i).getName(),data.getResData().get(i).getId());
                     }
                     handler.sendEmptyMessage(0);

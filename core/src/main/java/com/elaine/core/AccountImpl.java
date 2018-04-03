@@ -7,7 +7,9 @@ import android.util.SparseArray;
 import com.elaine.core.api.ApiResponse;
 import com.elaine.core.api.Constants;
 import com.elaine.core.api.Urls;
+import com.elaine.core.model.CarBrandBean;
 import com.elaine.core.model.CarLevelBean;
+import com.elaine.core.model.CarTypeBean;
 import com.elaine.core.model.InsuranceCompanyBean;
 import com.elaine.core.model.LocalBean;
 import com.elaine.core.model.MyInformBean;
@@ -223,6 +225,35 @@ public class AccountImpl implements  AccountAction{
                 .addParams(Constants.SOURCE,SOURCE)
                 .addParams(Constants.SIGN,generateSign(method,timestamp))
                 .post(new ResponseCallback<CarLevelBean>(callback,mType));
+    }
+
+    @Override
+    public void getCarBrandByLevel(String method, String level, ActionCallback<CarBrandBean> callback) {
+        Type mType = new TypeToken<ApiResponse<CarBrandBean>>(){}.getType();
+        String timestamp = getTime();
+        new OkHttpRequest.Builder()
+                .url(Urls.BASE_URL)
+                .addParams(Constants.METHOD,method)
+                .addParams("level",level)
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<CarBrandBean>(callback,mType));
+    }
+
+    @Override
+    public void getCarType(String method, String brand, String level, ActionCallback<CarTypeBean> callback) {
+        Type mType = new TypeToken<ApiResponse<CarTypeBean>>(){}.getType();
+        String timestamp = getTime();
+        new OkHttpRequest.Builder()
+                .url(Urls.BASE_URL)
+                .addParams(Constants.METHOD,method)
+                .addParams("level",level)
+                .addParams("brand",brand)
+                .addParams(Constants.TIMESTAMP,timestamp)
+                .addParams(Constants.SOURCE,SOURCE)
+                .addParams(Constants.SIGN,generateSign(method,timestamp))
+                .post(new ResponseCallback<CarTypeBean>(callback,mType));
     }
 
     public static String getTime(){
